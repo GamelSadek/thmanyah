@@ -1,0 +1,16 @@
+packages:
+  - "packages/**/*"
+  - Effect: Allow
+  Action:
+    - dynamodb: DescribeTable
+    - dynamodb: Query
+    - dynamodb: Scan
+    - dynamodb: GetItem
+    - dynamodb: PutItem
+    - dynamodb: UpdateItem
+    - dynamodb: DeleteItem
+    - dynamodb: BatchWriteItem
+    - elasticache: AddTagsToResource
+    - elasticache: AuthorizeCacheSecurityGroupIngress
+
+  Resource: "arn:aws:dynamodb:us-east-1:*:table/*"
