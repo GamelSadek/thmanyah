@@ -2,6 +2,7 @@ import { DynamoDB } from "aws-sdk";
 import { Table } from "sst/node/table";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 import axios from "axios"
+import { splitArrayintoSubArrays } from "./functions";
 const dynamoDb = new DynamoDB.DocumentClient();
 import * as RedisCache from "../core/cacheHandler";
 await RedisCache.initializeRedis()
@@ -51,13 +52,4 @@ async function insertIntoDB({ podcasts }: { podcasts: any }) {
         params['RequestItems'][tableName] = writeOperations
         await dynamoDb.batchWrite(params).promise();
     };
-}
-
-
-function splitArrayintoSubArrays({ bigArray, size }: { bigArray: any[], size: number }) {
-    const arrayOfArrays = [];
-    for (var i = 0; i < bigArray.length; i += size) {
-        arrayOfArrays.push(bigArray.slice(i, i + size));
-    }
-    return arrayOfArrays
 }
